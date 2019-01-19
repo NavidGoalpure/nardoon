@@ -45,7 +45,6 @@ const Index = ({
           {edges.map((project, index) => (
             <Card
               delay={index}
-              date={project.node.frontmatter.date}
               title={project.node.frontmatter.title}
               cover={project.node.frontmatter.cover.childImageSharp.fluid}
               path={project.node.fields.slug}
@@ -71,7 +70,7 @@ Index.propTypes = {
 
 export const pageQuery = graphql`
   query HomeQuery {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___title], order: DESC }) {
       edges {
         node {
           fields {
@@ -85,7 +84,6 @@ export const pageQuery = graphql`
                 }
               }
             }
-            date(formatString: "DD.MM.YYYY")
             title
             areas
           }

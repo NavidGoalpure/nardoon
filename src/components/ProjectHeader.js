@@ -69,7 +69,7 @@ const Text = styled.div`
   color: white;
 `
 
-const ProjectHeader = ({ avatar, name, title, date, areas, text }) => (
+const ProjectHeader = ({ avatar, name, title, areas, text }) => (
   <Wrapper>
     <Content>
       <Back to="/">
@@ -92,7 +92,6 @@ const ProjectHeader = ({ avatar, name, title, date, areas, text }) => (
         <Spring native config={config.slow} delay={600} from={{ opacity: 0 }} to={{ opacity: 1 }}>
           {props => (
             <animated.div style={props}>
-              {/* <p>{date}</p> */}
               <div>
                 {areas.map((area, index) => (
                   <React.Fragment key={area}>
@@ -120,7 +119,6 @@ ProjectHeader.propTypes = {
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
   areas: PropTypes.array.isRequired,
   text: PropTypes.string.isRequired,
 }

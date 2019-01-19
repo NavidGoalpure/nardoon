@@ -65,7 +65,7 @@ const Name = styled.h4`
   margin-top: 0;
 `
 
-const Card = ({ path, cover, date, areas, title, delay }) => (
+const Card = ({ path, cover, areas, title, delay }) => (
   <Spring
     native
     delay={200 * delay}
@@ -103,7 +103,6 @@ export default Card
 Card.propTypes = {
   path: PropTypes.string.isRequired,
   cover: PropTypes.object.isRequired,
-  date: PropTypes.string.isRequired,
   areas: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   delay: PropTypes.number.isRequired,

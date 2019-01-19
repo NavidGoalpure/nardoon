@@ -34,7 +34,6 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
       <ProjectHeader
         avatar={config.avatar}
         name={config.name}
-        date={project.date}
         title={project.title}
         areas={project.areas}
         text={postNode.code.body}
@@ -116,7 +115,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        date(formatString: "DD.MM.YYYY")
         title
         areas
       }
