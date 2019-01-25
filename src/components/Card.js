@@ -40,9 +40,14 @@ const Content = styled.div`
   padding: 1rem;
   position: relative;
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  opacity: 0;
+  opacity: 1;
   background: ${props => rgba(props.theme.colors.link, 0.65)};
-  height: 0;
+  height: 120px;
+
+  @media (min-width: ${props => props.theme.breakpoints.s}) {
+    opacity: 0;
+    height: 0px;
+  }
 
   ${CardItem}:hover & {
     opacity: 1;
