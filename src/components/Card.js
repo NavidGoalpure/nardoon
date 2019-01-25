@@ -47,11 +47,10 @@ const Content = styled.div`
   @media (min-width: ${props => props.theme.breakpoints.s}) {
     opacity: 0;
     height: 0px;
-  }
-
-  ${CardItem}:hover & {
-    opacity: 1;
-    height: 120px;
+    ${CardItem}:hover & {
+      opacity: 1;
+      height: 120px;
+    }
   }
 `
 
