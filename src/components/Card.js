@@ -44,7 +44,7 @@ const Content = styled.div`
   background: ${props => rgba(props.theme.colors.link, 0.65)};
   height: 120px;
 
-  @media (min-width: ${props => props.theme.breakpoints.s}) {
+  @media (min-width: ${props => props.theme.breakpoints.m}) {
     opacity: 0;
     height: 0px;
     ${CardItem}:hover & {
