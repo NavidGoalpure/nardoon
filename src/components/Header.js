@@ -39,12 +39,12 @@ const Name = styled.h1`
   color: ${props => props.theme.colors.color};
 `
 
-const Location = styled.div`
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+// const Location = styled.div`
+//   font-size: 0.9rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `
 
 const SocialMedia = styled.div`
   margin-top: 2rem;
@@ -61,7 +61,7 @@ const Header = ({ avatar, name, location, socialMedia }) => (
         <img src={avatar} alt={name} />
       </Avatar>
       <Name>{name}</Name>
-      <Location>{location}</Location>
+      {/* <Location>{location}</Location> */}
       <SocialMedia>
         {socialMedia.map(social => (
           <a key={social.name} href={social.url} rel="noopener noreferrer" target="_blank">

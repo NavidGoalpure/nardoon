@@ -1,10 +1,10 @@
 module.exports = {
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "portfolio"
 
-  siteTitle: 'تقدیم به امیلیا', // Navigation and Site Title
-  siteTitleAlt: 'سوالاتی برای دورهمی یا قرارهای عاشقانه ', // Alternative Site title for SEO
-  siteTitleShort: 'امیلیا', // short_name for manifest
-  siteHeadline: 'سوالاتی برای دورهمی یا قرارهای عاشقانه ', // Headline for schema.org JSONLD
+  siteTitle: 'انار', // Navigation and Site Title
+  siteTitleAlt: 'خوب بود این مردم دانه های دلشان پیدا بود ', // Alternative Site title for SEO
+  siteTitleShort: 'انار', // short_name for manifest
+  siteHeadline: 'خوب بود این مردم دانه های دلشان پیدا بود', // Headline for schema.org JSONLD
   siteUrl: 'https://emilia.lekoarts.de', // Domain of your site. No trailing slash!
   siteLanguage: 'fa', // Language Tag on <html> element
   siteLogo: '/logos/logo.png', // Used for SEO and manifest
@@ -24,20 +24,21 @@ module.exports = {
 
   // Your information
   avatar: '/logos/lekoarts.png',
-  name: 'LekoArts',
+  name: 'انار',
   location: 'Iran',
   socialMedia: [
     {
-      url: 'https://twitter.com/lekoarts_de',
-      name: 'Twitter',
+      url: 'https://github.com/NavidGoalpure/anaardun',
+      name: 'گیت‌هاب',
+    },
+
+    {
+      url: 'https://t.me/GreateStallman',
+      name: 'تلگرام',
     },
     {
-      url: 'https://www.instagram.com/lekoarts.de',
-      name: 'Instagram',
-    },
-    {
-      url: 'https://www.lekoarts.de/en',
-      name: 'Homepage',
+      url: 'https://virgool.io/@navid.goalpure',
+      name: 'وبلاگ',
     },
   ],
 }
