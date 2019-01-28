@@ -5,18 +5,17 @@ module.exports = {
   siteTitleAlt: 'خوب بود این مردم دانه های دلشان پیدا بود ', // Alternative Site title for SEO
   siteTitleShort: 'اناردون', // short_name for manifest
   siteHeadline: 'خوب بود این مردم دانه های دلشان پیدا بود', // Headline for schema.org JSONLD
-  siteUrl: 'https://emilia.lekoarts.de', // Domain of your site. No trailing slash!
+  siteUrl: 'https://qcloud.netlify.com', // Domain of your site. No trailing slash!
   siteLanguage: 'fa', // Language Tag on <html> element
   siteLogo: '/logos/logo.png', // Used for SEO and manifest
-  siteDescription:
-    'سوالاتی که می‌تونین در قرارهای عاشقانه یا دورهمی‌ها از همدیگه‌بپرسین تا لحظات جذاب‌تری رو داشته باشین',
+  siteDescription: 'دانه‌های دل‌تو نشون بده',
   author: 'Navid', // Author for schema.org JSONLD
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
-  userTwitter: '@emilia', // Twitter Username
-  ogSiteName: 'emilia', // Facebook Site Name
-  ogLanguage: 'en_US', // og:language
-  googleAnalyticsID: 'UA-12345689-1',
+  // userTwitter: '@emilia', // Twitter Username
+  // ogSiteName: 'emilia', // Facebook Site Name
+  ogLanguage: 'fa', // og:language
+  // googleAnalyticsID: 'UA-12345689-1',
 
   // Manifest and Progress color
   themeColor: '#3498DB',

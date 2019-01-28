@@ -30,11 +30,16 @@ const Avatar = styled.div`
   -ms-interpolation-mode: nearest-neighbor;
 
   img {
+    width: 8rem;
     border-radius: 50%;
   }
 `
 
 const Name = styled.h1`
+  margin: 1rem 0 0.25rem 0;
+  color: ${props => props.theme.colors.color};
+`
+const Desc = styled.h3`
   margin: 1rem 0 0.25rem 0;
   color: ${props => props.theme.colors.color};
 `
@@ -54,14 +59,14 @@ const SocialMedia = styled.div`
   }
 `
 
-const Header = ({ avatar, name, location, socialMedia }) => (
+const Header = ({ avatar, name, siteDescription, socialMedia }) => (
   <Wrapper>
     <Content>
       <Avatar>
         <img src={avatar} alt={name} />
       </Avatar>
       <Name>{name}</Name>
-      {/* <Location>{location}</Location> */}
+      <Desc>{siteDescription}</Desc>
       <SocialMedia>
         {socialMedia.map(social => (
           <a key={social.name} href={social.url} rel="noopener noreferrer" target="_blank">
@@ -78,6 +83,6 @@ export default Header
 Header.propTypes = {
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  siteDescription: PropTypes.string.isRequired,
   socialMedia: PropTypes.array.isRequired,
 }

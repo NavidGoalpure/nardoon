@@ -29,16 +29,16 @@ const reset = css`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     font-size: 18px;
     h1 {
-      font-size: 4.8rem;
+      font-size: 3.8rem;
     }
     h2 {
-      font-size: 3.5rem;
+      font-size: 3rem;
     }
     h3 {
-      font-size: 2.7rem;
+      font-size: 2.5rem;
     }
     h4 {
-      font-size: 2.3rem;
+      font-size: 2rem;
     }
     h5 {
       font-size: 1.7rem;

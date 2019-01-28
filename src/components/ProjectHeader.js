@@ -49,7 +49,7 @@ const Avatar = styled.div`
 `
 
 const Name = styled(animated.h2)`
-  margin: 0 0 0 1rem;
+  margin: 0 1rem 0 1rem;
   color: ${props => props.theme.colors.color};
 `
 
@@ -63,10 +63,12 @@ const Details = styled.div`
   }
 `
 
-const Text = styled.div`
+const Text = styled.h2`
   max-width: 750px;
   margin: 4rem auto 2rem auto;
   color: white;
+  font-size: 200%;
+  font-weight: initial;
 `
 
 const ProjectHeader = ({ avatar, name, title, areas, text }) => (

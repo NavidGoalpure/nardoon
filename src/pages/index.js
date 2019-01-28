@@ -38,7 +38,12 @@ const Index = ({
   },
 }) => (
   <Layout>
-    <Header avatar={config.avatar} name={config.name} location={config.location} socialMedia={config.socialMedia} />
+    <Header
+      avatar={config.avatar}
+      name={config.name}
+      siteDescription={config.siteDescription}
+      socialMedia={config.socialMedia}
+    />
     <BG>
       <Content>
         <Grid>
