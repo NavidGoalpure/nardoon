@@ -1,9 +1,9 @@
 module.exports = {
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "portfolio"
 
-  siteTitle: 'اناردون', // Navigation and Site Title
+  siteTitle: 'ناردون', // Navigation and Site Title
   siteTitleAlt: 'خوب بود این مردم دانه های دلشان پیدا بود ', // Alternative Site title for SEO
-  siteTitleShort: 'اناردون', // short_name for manifest
+  siteTitleShort: 'ناردون', // short_name for manifest
   siteHeadline: 'خوب بود این مردم دانه های دلشان پیدا بود', // Headline for schema.org JSONLD
   siteUrl: 'https://qcloud.netlify.com', // Domain of your site. No trailing slash!
   siteLanguage: 'fa', // Language Tag on <html> element
@@ -23,7 +23,7 @@ module.exports = {
 
   // Your information
   avatar: '/logos/lekoarts.png',
-  name: 'اناردون',
+  name: 'ناردون',
   location: 'Iran',
   socialMedia: [
     {
