@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Spring, animated, config } from 'react-spring'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
+import RandomBtn from './RandomBtn'
 
 import arrow from '../images/right-chevron.svg'
 
@@ -18,6 +19,10 @@ const Content = styled.div`
   max-width: ${props => props.theme.maxWidths.general};
   padding: 2rem 1.0875rem 13rem 1.0875rem;
   color: ${props => props.theme.colors.secondary};
+`
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const Back = styled(Link)`
@@ -74,13 +79,16 @@ const Text = styled.h2`
 const ProjectHeader = ({ avatar, name, title, areas, text }) => (
   <Wrapper>
     <Content>
-      <Back to="/">
-        <img src={arrow} data-info="back" alt="Back to home" aria-label="Back to home" />
-        <Avatar>
-          <img src={avatar} alt={name} />
-        </Avatar>
-        <Name>{name}</Name>
-      </Back>
+      <TopRow>
+        <Back to="/">
+          <img src={arrow} data-info="back" alt="Back to home" aria-label="Back to home" />
+          <Avatar>
+            <img src={avatar} alt={name} />
+          </Avatar>
+          <Name>{name}</Name>
+        </Back>
+        <RandomBtn />
+      </TopRow>
       <Details>
         <Spring
           native
