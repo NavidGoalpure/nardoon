@@ -36,32 +36,35 @@ const Index = ({
   data: {
     allMdx: { edges },
   },
-}) => (
-  <Layout>
-    <Header
-      avatar={config.avatar}
-      name={config.name}
-      siteDescription={config.siteDescription}
-      socialMedia={config.socialMedia}
-    />
-    <BG>
-      <Content>
-        <Grid>
-          {edges.map((project, index) => (
-            <Card
-              delay={index}
-              title={project.node.frontmatter.title}
-              cover={project.node.frontmatter.cover.childImageSharp.fluid}
-              path={project.node.fields.slug}
-              areas={project.node.frontmatter.areas}
-              key={project.node.fields.slug}
-            />
-          ))}
-        </Grid>
-      </Content>
-    </BG>
-  </Layout>
-)
+}) => {
+  console.log('edges=', edges)
+  return (
+    <Layout>
+      <Header
+        avatar={config.avatar}
+        name={config.name}
+        siteDescription={config.siteDescription}
+        socialMedia={config.socialMedia}
+      />
+      <BG>
+        <Content>
+          <Grid>
+            {edges.map((project, index) => (
+              <Card
+                delay={index}
+                title={project.node.frontmatter.title}
+                cover={project.node.frontmatter.cover.childImageSharp.fluid}
+                path={project.node.fields.slug}
+                areas={project.node.frontmatter.areas}
+                key={project.node.fields.slug}
+              />
+            ))}
+          </Grid>
+        </Content>
+      </BG>
+    </Layout>
+  )
+}
 
 export default Index
 
