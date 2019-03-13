@@ -32,7 +32,7 @@ module.exports = {
     },
 
     {
-      url: 'https://t.me/GreateStallman',
+      url: 'https://t.me/nardoon_news',
       name: 'تلگرام',
     },
     {
