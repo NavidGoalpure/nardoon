@@ -3,7 +3,6 @@ import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import t from 'typy'
 
 import { Layout, ProjectHeader, ProjectPagination, SEO } from '../components'
 import config from '../../config/site'
@@ -31,10 +30,10 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
   const images = imgs.edges
   const project = postNode.frontmatter
 
-  console.log('images=', images)
-  const randomList = t(images, '[0].node.childImageSharp.fluid.src')
-  // const testRandom = images[0]
-  console.log('testRandom=', randomList)
+  // console.log('images=', images)
+  // const randomList = t(images, '[0].node.childImageSharp.fluid.src')
+  // // const testRandom = images[0]
+  // console.log('testRandom=', randomList)
 
   return (
     <Layout customSEO>

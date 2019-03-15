@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { Link } from 'gatsby'
 import theme from '../../config/theme'
 
 const pulse = keyframes`
@@ -16,7 +17,7 @@ const pulse = keyframes`
     box-shadow: 0 0 0 0 rgba( 0,0,0, 0);
   }
 `
-const Container = styled.div`
+const Container = styled(Link)`
   display: flex;
   border: 2px solid ${theme.colors.accent};
   border-radius: 7px;
@@ -50,7 +51,7 @@ const Pulse = styled.div`
   z-index: 100;
 `
 const RandomBtn = () => (
-  <Container>
+  <Container to="/RandomPage/">
     <Text>شانسی</Text>
     <Pulse />
   </Container>
