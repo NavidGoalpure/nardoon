@@ -30,11 +30,6 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
   const images = imgs.edges
   const project = postNode.frontmatter
 
-  // console.log('images=', images)
-  // const randomList = t(images, '[0].node.childImageSharp.fluid.src')
-  // // const testRandom = images[0]
-  // console.log('testRandom=', randomList)
-
   return (
     <Layout customSEO>
       <SEO postPath={slug} postNode={postNode} postSEO />

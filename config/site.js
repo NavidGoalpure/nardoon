@@ -40,4 +40,7 @@ module.exports = {
       name: 'وبلاگ',
     },
   ],
+
+  // random Cards
+  numberOfCards: 3,
 }

@@ -8,52 +8,37 @@ import t from 'typy'
 import { Header, Layout } from '../components'
 import config from '../../config/site'
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(${props => props.theme.gridColumns}, 1fr);
-  grid-gap: 50px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-
-  .gatsby-image-outer-wrapper,
-  .gatsby-image-wrapper {
-    position: static !important;
-  }
-`
-
-const Content = styled.div`
-  margin: -6rem auto 0 auto;
-  max-width: ${props => props.theme.maxWidths.general};
-  padding: 0 ${props => props.theme.contentPadding} 6rem;
-  position: relative;
-`
-
 const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
+  position: relative;
+  padding: 2rem 0 0 0;
+  z-index: -1;
 `
-let finalImages
 
-let randomImages
+const OuterWrapper = styled.div`
+  padding: 0 ${props => props.theme.contentPadding};
+  margin: -10rem auto 0 auto;
+  z-index: -1;
+`
+
+const InnerWrapper = styled.div`
+  position: relative;
+  max-width: ${props => `${props.theme.maxWidths.project}px`};
+  margin: 0 auto;
+  z-index: -1;
+`
 
 export default class RandomQuery extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { imgsArray: null }
-    randomImages = shuffle(t(this.props, 'data.images.edges').safeObject)
-    finalImages = randomImages.splice(3)
-    console.log('-----------constructor------------')
+    const randomImages = [...shuffle(t(this.props, 'data.images.edges').safeObject)]
+    this.state = { allImage: randomImages.splice(config.numberOfCards), finalImages: randomImages }
   }
 
-  // const img = imgs[Math.floor(Math.random() * imgs.length)]
   render() {
-    console.log('state.imgs=', this.state.imgsArray)
-    console.log('randomImages=', randomImages)
+    const { finalImages } = this.state
     console.log('finalImages=', finalImages)
 
-    // console.log('imgsArray=', imgsArray)
-    console.log('props=', this.props)
     return (
       <Layout>
         <Header
@@ -63,22 +48,17 @@ export default class RandomQuery extends React.Component {
           socialMedia={config.socialMedia}
         />
         <BG>
-          <Content>
-            <Grid>
-              <Img
-                key={imgsArray.node.childImageSharp.fluid.src}
-                fluid={imgsArray.node.childImageSharp.fluid}
-                style={{ margin: '3rem 0' }}
-              />
-              {/* {imgs.map(image => (
-              <Img
-                key={image.node.childImageSharp.fluid.src}
-                fluid={image.node.childImageSharp.fluid}
-                style={{ margin: '3rem 0' }}
-              />
-            ))} */}
-            </Grid>
-          </Content>
+          <OuterWrapper>
+            <InnerWrapper>
+              {finalImages.map(image => (
+                <Img
+                  key={image.node.childImageSharp.fluid.src}
+                  fluid={image.node.childImageSharp.fluid}
+                  style={{ margin: '3rem 0' }}
+                />
+              ))}
+            </InnerWrapper>
+          </OuterWrapper>
         </BG>
       </Layout>
     )
