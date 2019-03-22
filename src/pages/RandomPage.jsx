@@ -7,7 +7,7 @@ import shuffle from 'shuffle-array'
 import styled, { keyframes } from 'styled-components'
 import t from 'typy'
 import theme from '../../config/theme'
-import { Header, Layout } from '../components'
+import { Header, Layout, RandomBtn } from '../components'
 import config from '../../config/site'
 
 const BG = styled.div`
@@ -61,16 +61,6 @@ const ImageWithColorAnimation = styled(Img)`
   filter: grayscale(0%);
   margin: 3rem 0;
 `
-const ReloadBtn = styled.button`
-  display: flex;
-  border: 2px solid ${theme.colors.accent};
-  border-radius: 7px;
-  cursor: pointer;
-  background: ${theme.colors.accent};
-  :hover {
-    -webkit-animation: none;
-  }
-`
 
 let restImage = null
 
@@ -119,19 +109,7 @@ export default class RandomQuery extends React.Component {
           siteDescription={config.siteDescription}
           socialMedia={config.socialMedia}
         />
-        <ReloadBtn
-          onClick={() => {
-            this.setState({
-              cardSelectedStatus: false,
-              selected: new Array(config.numberOfCards).fill('none'),
-              restImage: restImage.splice(config.numberOfCards),
-              visibleImages: restImage,
-            })
-          }}
-        >
-          {' '}
-          کارت های بعدی
-        </ReloadBtn>
+
         <BG>
           <OuterWrapper>
             <InnerWrapper>
@@ -156,6 +134,19 @@ export default class RandomQuery extends React.Component {
                 </div>
               ))}
             </InnerWrapper>
+            <button
+              styles={{ height: '-webkit-fill-available' }}
+              onClick={() => {
+                this.setState({
+                  cardSelectedStatus: false,
+                  selected: new Array(config.numberOfCards).fill('none'),
+                  restImage: restImage.splice(config.numberOfCards),
+                  visibleImages: restImage,
+                })
+              }}
+            >
+              تعویض کارت ها
+            </button>
           </OuterWrapper>
         </BG>
       </Layout>
