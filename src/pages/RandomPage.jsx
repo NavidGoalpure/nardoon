@@ -28,38 +28,38 @@ const InnerWrapper = styled.div`
   max-width: ${props => `${props.theme.maxWidths.project}px`};
   margin: 0 auto;
 `
-const toGray = keyframes`
+const InitialAnimation = keyframes`
   from {  filter: grayscale(0%);}
   to {  filter:grayscale(100%);}
 `
-const GrayCard = {
-  // animationName: toGray,
-  // filter: 'grayscale(100%)',
-  opacity: '0.5',
-}
 
-const toColorize = keyframes`
+const SelectedImageAnimation = keyframes`
   from {  filter: grayscale(100%);}
   to {  filter:grayscale(0%);}
 `
-const colorizedCard = {
-  // animationName: toColorize,
-  // filter: 'grayscale(0%)',
-  opacity: '1',
-}
 
-const toBlur = keyframes`
-  from {  filter: blur(0px);}
-  to {  filter:blur(5px);}
+const NoneSelectedImageAnimation = keyframes`
+  from {  filter: grayscale(100%) blur(0px);}
+  to {  filter:grayscale(100%) blur(5px);}
 `
-const blurizedCard = {
-  // animationName: toBlur,
-  // filter: 'toBlur(5px)',
-  opacity: '0',
-}
+
 const Image = styled(Img)`
+  animation-name: ${InitialAnimation};
   margin: 3rem 0;
   animation-duration: 2s;
+  filter: grayscale(100%);
+`
+const NoneNoneSelectedImage = styled(Img)`
+  animation-name: ${NoneSelectedImageAnimation};
+  margin: 3rem 0;
+  animation-duration: 1s;
+  filter: grayscale(100%) blur(10px);
+`
+const ImageWithColorAnimation = styled(Img)`
+  animation-name: ${SelectedImageAnimation};
+  animation-duration: 1s;
+  filter: grayscale(0%);
+  margin: 3rem 0;
 `
 const ReloadBtn = styled.button`
   display: flex;
@@ -71,8 +71,7 @@ const ReloadBtn = styled.button`
     -webkit-animation: none;
   }
 `
-// filter: 'grayscale(100%)',
-// animationName: toGray,
+
 let restImage = null
 
 export default class RandomQuery extends React.Component {
@@ -112,20 +111,6 @@ export default class RandomQuery extends React.Component {
 
   render() {
     const { visibleImages, selected, cardSelectedStatus } = this.state
-    const cssClasses = new Array(config.numberOfCards).fill('none')
-
-    for (let i = 0; i < config.numberOfCards; i += 1) {
-      if (selected[i] === 'selected') {
-        cssClasses[i] = colorizedCard
-      } else if (selected[i] === 'rejected') {
-        cssClasses[i] = blurizedCard
-      } else {
-        cssClasses[i] = GrayCard
-      }
-    }
-    console.log('cssClasses=', cssClasses)
-    // let colorizedCardStyle= classNames({colorizedCard:true})
-
     return (
       <Layout>
         <Header
@@ -160,7 +145,14 @@ export default class RandomQuery extends React.Component {
                   }}
                   key={image.node.childImageSharp.fluid.src}
                 >
-                  <Image fluid={image.node.childImageSharp.fluid} style={cssClasses[index]} />
+                  {/* this is a Case Statement */}
+                  {
+                    {
+                      selected: <ImageWithColorAnimation fluid={image.node.childImageSharp.fluid} />,
+                      rejected: <NoneNoneSelectedImage fluid={image.node.childImageSharp.fluid} />,
+                      none: <Image fluid={image.node.childImageSharp.fluid} />,
+                    }[selected[index]]
+                  }
                 </div>
               ))}
             </InnerWrapper>
