@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Spring, animated, config } from 'react-spring'
 import { rgba } from 'polished'
-import Img from 'gatsby-image'
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 const CardItem = styled(Link)`
   min-height: 500px;
@@ -42,14 +42,14 @@ const Content = styled.div`
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   opacity: 1;
   background: ${props => rgba(props.theme.colors.link, 0.65)};
-  height: 120px;
+  height: 5rem;
 
   @media (min-width: ${props => props.theme.breakpoints.m}) {
     opacity: 0;
     height: 0px;
     ${CardItem}:hover & {
       opacity: 1;
-      height: 120px;
+      height: 8rem;
     }
   }
 `
