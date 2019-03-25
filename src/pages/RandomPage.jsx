@@ -46,7 +46,7 @@ const Avatar = styled.div`
 
 const Desc = styled(animated.h5)`
   text-align: center;
-  margin: 7rem 2rem 7rem 2rem;
+  margin: 7rem 2rem 1rem 2rem;
 `
 const reloadStyle = {
   margin: '3rem 0rem',
@@ -118,6 +118,8 @@ export default class RandomQuery extends React.Component {
     allImage = [...shuffle(t(this.props, 'data.images.edges').safeObject)]
     const someImage = allImage.splice(config.numberOfCards)
     this.state = {
+      reloadHint: true,
+      selectHint: true,
       selected: new Array(config.numberOfCards).fill('none'),
       restImage: someImage,
       visibleImages: allImage,
@@ -133,13 +135,14 @@ export default class RandomQuery extends React.Component {
     selected = new Array(config.numberOfCards).fill('rejected')
     selected.splice(index, 1, 'selected')
     this.setState({
+      selectHint: false,
       selected,
       cardSelectedStatus: true,
     })
   }
 
   render() {
-    const { visibleImages, selected, cardSelectedStatus } = this.state
+    const { visibleImages, selected, cardSelectedStatus, selectHint, reloadHint } = this.state
     return (
       <Layout>
         <TopRow>
@@ -152,12 +155,14 @@ export default class RandomQuery extends React.Component {
         </TopRow>
         {allImage.length > config.numberOfCards - 1 ? (
           <React.Fragment>
+            {reloadHint && <Desc> با زدن این دکمه می‌توانید این کارت ها را دور بیندازید</Desc>}
             <ReloadBtn
               style={reloadStyle}
               onClick={() => {
                 const someImage = allImage.splice(config.numberOfCards)
                 this.setState(
                   {
+                    reloadHint: false,
                     cardSelectedStatus: false,
                     selected: new Array(config.numberOfCards).fill('none'),
                     restImage: someImage,
@@ -195,7 +200,7 @@ export default class RandomQuery extends React.Component {
                 </InnerWrapper>
               </OuterWrapper>
             </BG>
-            <Desc>برای انتخاب «هر کارت» ‌روی آن کلیک کنید.</Desc>
+            {selectHint && <Desc>برای انتخاب «هر کارت» ‌روی آن کلیک کنید.</Desc>}
           </React.Fragment>
         ) : (
           <Desc> شما همه کارت ها را بازی کرده اید...</Desc>
