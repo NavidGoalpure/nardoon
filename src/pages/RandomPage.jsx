@@ -4,12 +4,10 @@ import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import shuffle from 'shuffle-array'
 import styled, { keyframes } from 'styled-components'
-import { Spring, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import t from 'typy'
 import arrow from '../images/right-chevron.svg'
-
-import theme from '../../config/theme'
-import { ProjectHeader, Layout, ReloadBtn } from '../components'
+import { Layout, ReloadBtn } from '../components'
 import config from '../../config/site'
 
 const TopRow = styled.div`
@@ -124,10 +122,6 @@ export default class RandomQuery extends React.Component {
     // this.ActionLink = this.ActionLink.bind(this)
   }
 
-  spliceItems = () => {
-    this.setState({ restImage: restImage.splice(config.numberOfCards) })
-  }
-
   cardSelect = index => {
     let { selected } = this.state
     selected = new Array(config.numberOfCards).fill('rejected')
@@ -140,7 +134,6 @@ export default class RandomQuery extends React.Component {
 
   render() {
     const { visibleImages, selected, cardSelectedStatus } = this.state
-    console.log('allImage=', allImage.length)
     return (
       <Layout>
         <TopRow>
