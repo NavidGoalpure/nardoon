@@ -32,37 +32,34 @@ const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
 `
 
-const Index = ({ data: { allMdx, multiChance } }) => {
+const Index = ({ data: { allMdx, multiChance } }) => (
+  <Layout>
+    <Header
+      avatar={config.avatar}
+      name={config.name}
+      siteDescription={config.siteDescription}
+      socialMedia={config.socialMedia}
+    />
 
-  return (
-    <Layout>
-      <Header
-        avatar={config.avatar}
-        name={config.name}
-        siteDescription={config.siteDescription}
-        socialMedia={config.socialMedia}
-      />
-
-      <BG>
-        <Content>
-          <Grid>
-            <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
-            {allMdx.edges.map((project, index) => (
-              <Card
-                delay={index}
-                title={project.node.frontmatter.title}
-                cover={project.node.frontmatter.cover.childImageSharp.fluid}
-                path={project.node.fields.slug}
-                areas={project.node.frontmatter.areas}
-                key={project.node.fields.slug}
-              />
-            ))}
-          </Grid>
-        </Content>
-      </BG>
-    </Layout>
-  )
-}
+    <BG>
+      <Content>
+        <Grid>
+          <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
+          {allMdx.edges.map((project, index) => (
+            <Card
+              delay={index}
+              title={project.node.frontmatter.title}
+              cover={project.node.frontmatter.cover.childImageSharp.fluid}
+              path={project.node.fields.slug}
+              areas={project.node.frontmatter.areas}
+              key={project.node.fields.slug}
+            />
+          ))}
+        </Grid>
+      </Content>
+    </BG>
+  </Layout>
+)
 
 export default Index
 
