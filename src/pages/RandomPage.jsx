@@ -48,6 +48,12 @@ const Desc = styled(animated.h5)`
   text-align: center;
   margin: 7rem 2rem 7rem 2rem;
 `
+const reloadStyle = {
+  margin: '3rem 0rem',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+}
 
 const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
@@ -147,7 +153,7 @@ export default class RandomQuery extends React.Component {
         {allImage.length > config.numberOfCards - 1 ? (
           <React.Fragment>
             <ReloadBtn
-              style={{ margin: ' 5rem 1rem 5rem 1rem' }}
+              style={reloadStyle}
               onClick={() => {
                 const someImage = allImage.splice(config.numberOfCards)
                 this.setState(

@@ -3,74 +3,57 @@ import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 import theme from '../../config/theme'
 
-const Container = styled.div`
-  position: relative;
+const Container = styled.div``
+const Btn = styled.div`
+  transition: all 300ms;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  background: ${theme.colors.accent2};
   cursor: pointer;
-  background-color: #000;
   height: 5rem;
-  z-index: 0;
-  box-shadow: 0px 0px 17px 1px rgba(0, 0, 0, 0.34);
-  line-height: 5em;
+  width: 5rem;
 `
-const Up = styled.div`
-  content: '';
-  background: ${theme.colors.accent};
-  height: 50%;
-  width: 0;
-  position: absolute;
-  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  top: 0;
-  left: 0;
-  right: auto;
-
-  ${Container}:hover & {
-    width: 100%;
-    right: 0;
-    left: auto;
-  }
-`
-const Down = styled.div`
-  content: '';
-  background: ${theme.colors.accent};
-  height: 50%;
-  width: 0;
-  position: absolute;
-  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  bottom: 0;
-  right: 0;
-  left: auto;
-  ${Container}:hover & {
-    width: 100%;
-    left: 0;
-    right: auto;
-  }
-`
-
-const Span = styled.span`
-  color: #fff;
-  display: block;
-  z-index: 1;
-  position: absolute;
-  text-align: center;
+const Svg = styled.svg`
+  transition: transform 500ms cubic-bezier(0.85, -0.48, 0.26, 0.67);
+  height: 100%;
   width: 100%;
   ${Container}:hover & {
-    color: #000;
+    transform: rotate(30deg);
+    transform: rotate(-150deg);
   }
+`
+const Path = styled.path`
+  fill: #111;
 `
 
 const ReloadBtn = props => {
-  const { style, classname, onClick } = props
+  const { onClick, style } = props
   return (
-    <Container onClick={onClick} style={style} classname={classname}>
-      <Up />
-      <Span> تعویض کارت‌ها</Span>
-      <Down />
+    <Container style={style}>
+      <Btn onClick={onClick}>
+        <Svg
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          x="0px"
+          y="0px"
+          width="40px"
+          height="40px"
+          viewBox="0 0 40 40"
+          enableBackground="new 0 0 40 40"
+          xmlSpace="preserve"
+        >
+          <Path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12.011 20c0-0.002 0-0.003 0-0.005 0-4.421 3.578-8.005 7.991-8.005 2.683 0 5.051 1.329 6.5 3.361l1.26-1.644c-1.834-2.254-4.627-3.696-7.76-3.696 -5.519 0-9.994 4.471-10.001 9.989H8.013l3.018 4.013L13.987 20H12.011zM32 20l-2.969-3.985L26 20h1.992c-0.003 4.419-3.579 8.001-7.99 8.001 -2.716 0-5.111-1.36-6.555-3.435l-1.284 1.644c1.832 2.314 4.66 3.803 7.84 3.803 5.524 0 10.001-4.478 10.001-10.001 0-0.004-0.001-0.008-0.001-0.012H32z"
+          />
+        </Svg>
+      </Btn>
     </Container>
   )
 }
 export default ReloadBtn
 ReloadBtn.propTypes = {
+  onClick: PropTypes.func.isRequired,
   style: PropTypes.object,
-  classname: PropTypes.object,
-  onClick: PropTypes.func,
 }
