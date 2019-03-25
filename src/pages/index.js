@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Card, Header, Layout } from '../components'
+import { Card, Header, Layout, RandomBtn } from '../components'
 import config from '../../config/site'
 
 const Grid = styled.div`
@@ -40,12 +40,15 @@ const Index = ({
   console.log('edges=', edges)
   return (
     <Layout>
+      <RandomBtn />
+
       <Header
         avatar={config.avatar}
         name={config.name}
         siteDescription={config.siteDescription}
         socialMedia={config.socialMedia}
       />
+
       <BG>
         <Content>
           <Grid>
