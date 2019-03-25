@@ -145,7 +145,7 @@ export default class RandomQuery extends React.Component {
           </Back>
         </TopRow>
         {allImage.length > config.numberOfCards - 1 ? (
-          <fragmen>
+          <React.Fragment>
             <ReloadBtn
               style={{ margin: ' 5rem 1rem 5rem 1rem' }}
               onClick={() => {
@@ -190,7 +190,7 @@ export default class RandomQuery extends React.Component {
               </OuterWrapper>
             </BG>
             <Desc>برای انتخاب «هر کارت» ‌روی آن کلیک کنید.</Desc>
-          </fragmen>
+          </React.Fragment>
         ) : (
           <Desc> شما همه کارت ها را بازی کرده اید...</Desc>
         )}
