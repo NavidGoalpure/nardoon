@@ -11,7 +11,7 @@ module.exports = {
     link: '#328bff',
     linkHover: '#79a8ff',
     accent: '#f7f01f',
-    accent2: '#f9f696',
+    accent2: '#efc1c5',
   },
   maxWidths: {
     general: '1600px',
