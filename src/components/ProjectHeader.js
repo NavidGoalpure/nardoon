@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Spring, animated, config } from 'react-spring'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
-import RandomBtn from './RandomBtn'
-
 import arrow from '../images/right-chevron.svg'
 
 const Wrapper = styled.div`
@@ -87,7 +85,6 @@ const ProjectHeader = ({ avatar, name, title, areas, text }) => (
           </Avatar>
           <Name>{name}</Name>
         </Back>
-        <RandomBtn />
       </TopRow>
       <Details>
         <Spring

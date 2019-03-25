@@ -10,8 +10,8 @@ module.exports = {
     secondary: '#b6b6b6',
     link: '#328bff',
     linkHover: '#79a8ff',
-    accent: '#913234',
-    accent2: '#d83c42',
+    accent: '#f7f01f',
+    accent2: '#efc1c5',
   },
   maxWidths: {
     general: '1600px',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Card, Header, Layout } from '../components'
+import { Card, Header, Layout, ChanceCard } from '../components'
 import config from '../../config/site'
 
 const Grid = styled.div`
@@ -32,12 +32,8 @@ const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
 `
 
-const Index = ({
-  data: {
-    allMdx: { edges },
-  },
-}) => {
-  console.log('edges=', edges)
+const Index = ({ data: { allMdx, multiChance } }) => {
+
   return (
     <Layout>
       <Header
@@ -46,10 +42,12 @@ const Index = ({
         siteDescription={config.siteDescription}
         socialMedia={config.socialMedia}
       />
+
       <BG>
         <Content>
           <Grid>
-            {edges.map((project, index) => (
+            <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
+            {allMdx.edges.map((project, index) => (
               <Card
                 delay={index}
                 title={project.node.frontmatter.title}
@@ -94,6 +92,15 @@ export const pageQuery = graphql`
             }
             title
             areas
+          }
+        }
+      }
+    }
+    multiChance: allImageSharp(filter: { fluid: { originalName: { eq: "multiChance.png" } } }) {
+      edges {
+        node {
+          fluid(maxWidth: 760, quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
