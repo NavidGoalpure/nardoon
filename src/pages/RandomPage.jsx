@@ -1,14 +1,55 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import shuffle from 'shuffle-array'
 import styled, { keyframes } from 'styled-components'
+import { Spring, animated } from 'react-spring'
 import t from 'typy'
+import arrow from '../images/right-chevron.svg'
+
 import theme from '../../config/theme'
-import { Header, Layout, RandomBtn } from '../components'
+import { ProjectHeader, Layout, ReloadBtn } from '../components'
 import config from '../../config/site'
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+`
+
+const Back = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  img[data-info='back'] {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 1rem 0 0;
+  }
+`
+
+const Avatar = styled.div`
+  height: 3rem;
+  width: 3rem;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+
+  img {
+    border-radius: 50%;
+    height: auto;
+    width: 100%;
+  }
+`
+
+const Desc = styled(animated.h5)`
+  text-align: center;
+  margin: 7rem 2rem 7rem 2rem;
+`
 
 const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
@@ -21,6 +62,7 @@ const OuterWrapper = styled.div`
   padding: 0 ${props => props.theme.contentPadding};
   margin: -10rem auto 0 auto;
   z-index: -1;
+  margin-top: auto;
 `
 
 const InnerWrapper = styled.div`
@@ -28,6 +70,7 @@ const InnerWrapper = styled.div`
   max-width: ${props => `${props.theme.maxWidths.project}px`};
   margin: 0 auto;
 `
+
 const InitialAnimation = keyframes`
   from {  filter: grayscale(0%);}
   to {  filter:grayscale(100%);}
@@ -62,21 +105,22 @@ const ImageWithColorAnimation = styled(Img)`
   margin: 3rem 0;
 `
 
-let restImage = null
+let allImage = null
 
 export default class RandomQuery extends React.Component {
   constructor(props) {
     super(props)
 
-    restImage = [...shuffle(t(this.props, 'data.images.edges').safeObject)]
-
+    allImage = [...shuffle(t(this.props, 'data.images.edges').safeObject)]
+    const someImage = allImage.splice(config.numberOfCards)
     this.state = {
       selected: new Array(config.numberOfCards).fill('none'),
-      restImage: restImage.splice(config.numberOfCards),
-      visibleImages: restImage,
+      restImage: someImage,
+      visibleImages: allImage,
       cardSelectedStatus: false,
     }
-    restImage = [...this.state.restImage]
+    allImage = [...this.state.restImage]
+
     // this.ActionLink = this.ActionLink.bind(this)
   }
 
@@ -88,67 +132,75 @@ export default class RandomQuery extends React.Component {
     let { selected } = this.state
     selected = new Array(config.numberOfCards).fill('rejected')
     selected.splice(index, 1, 'selected')
-    this.setState(
-      {
-        selected,
-        cardSelectedStatus: true,
-      },
-      () => {
-        restImage = [...this.state.restImage]
-      }
-    )
+    this.setState({
+      selected,
+      cardSelectedStatus: true,
+    })
   }
 
   render() {
     const { visibleImages, selected, cardSelectedStatus } = this.state
+    console.log('allImage=', allImage.length)
     return (
       <Layout>
-        <Header
-          avatar={config.avatar}
-          name={config.name}
-          siteDescription={config.siteDescription}
-          socialMedia={config.socialMedia}
-        />
-
-        <BG>
-          <OuterWrapper>
-            <InnerWrapper>
-              {visibleImages.map((image, index) => (
-                // eslint-disable-next-line jsx-a11y/interactive-supports-focus
-                <div
-                  role="button"
-                  onKeyDown={() => this.cardSelect(index)}
-                  onClick={() => {
-                    if (!cardSelectedStatus) this.cardSelect(index)
-                  }}
-                  key={image.node.childImageSharp.fluid.src}
-                >
-                  {/* this is a Case Statement */}
-                  {
-                    {
-                      selected: <ImageWithColorAnimation fluid={image.node.childImageSharp.fluid} />,
-                      rejected: <NoneNoneSelectedImage fluid={image.node.childImageSharp.fluid} />,
-                      none: <Image fluid={image.node.childImageSharp.fluid} />,
-                    }[selected[index]]
-                  }
-                </div>
-              ))}
-            </InnerWrapper>
-            <button
-              styles={{ height: '-webkit-fill-available' }}
+        <TopRow>
+          <Back to="/">
+            <img src={arrow} data-info="back" alt="Back to home" aria-label="Back to home" />
+            <Avatar>
+              <img src={config.avatar} alt="لوگو" />
+            </Avatar>
+          </Back>
+        </TopRow>
+        {allImage.length > config.numberOfCards - 1 ? (
+          <fragmen>
+            <ReloadBtn
+              style={{ margin: ' 5rem 1rem 5rem 1rem' }}
               onClick={() => {
-                this.setState({
-                  cardSelectedStatus: false,
-                  selected: new Array(config.numberOfCards).fill('none'),
-                  restImage: restImage.splice(config.numberOfCards),
-                  visibleImages: restImage,
-                })
+                const someImage = allImage.splice(config.numberOfCards)
+                this.setState(
+                  {
+                    cardSelectedStatus: false,
+                    selected: new Array(config.numberOfCards).fill('none'),
+                    restImage: someImage,
+                    visibleImages: allImage,
+                  },
+                  () => {
+                    allImage = [...this.state.restImage]
+                  }
+                )
               }}
-            >
-              تعویض کارت ها
-            </button>
-          </OuterWrapper>
-        </BG>
+            />
+            <BG>
+              <OuterWrapper>
+                <InnerWrapper>
+                  {visibleImages.map((image, index) => (
+                    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
+                    <div
+                      role="button"
+                      onKeyDown={() => this.cardSelect(index)}
+                      onClick={() => {
+                        if (!cardSelectedStatus) this.cardSelect(index)
+                      }}
+                      key={image.node.childImageSharp.fluid.src}
+                    >
+                      {/* this is a Case Statement */}
+                      {
+                        {
+                          selected: <ImageWithColorAnimation fluid={image.node.childImageSharp.fluid} />,
+                          rejected: <NoneNoneSelectedImage fluid={image.node.childImageSharp.fluid} />,
+                          none: <Image fluid={image.node.childImageSharp.fluid} />,
+                        }[selected[index]]
+                      }
+                    </div>
+                  ))}
+                </InnerWrapper>
+              </OuterWrapper>
+            </BG>
+            <Desc>برای انتخاب «هر کارت» ‌روی آن کلیک کنید.</Desc>
+          </fragmen>
+        ) : (
+          <Desc> شما همه کارت ها را بازی کرده اید...</Desc>
+        )}
       </Layout>
     )
   }
