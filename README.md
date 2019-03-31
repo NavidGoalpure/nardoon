@@ -1,34 +1,3 @@
-![](https://i.imgur.com/xPj0ICn.png)
-
-# Gatsby Starter Portfolio: Emilia
-
-A portfolio starter for [Gatsby](https://www.gatsbyjs.org/). The target audience are designers and photographers.
-
-[Demo Website](https://emilia.lekoarts.de)
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/LekoArts/gatsby-starter-portfolio-emilia) [![Edit gatsby-starter-portfolio-emilia](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/LekoArts/gatsby-starter-portfolio-emilia/tree/master/)
-
-[![CircleCI](https://circleci.com/gh/LekoArts/gatsby-starter-portfolio-emilia.svg?style=svg)](https://circleci.com/gh/LekoArts/gatsby-starter-portfolio-emilia)
-
-- Focus on big images
-- Dark theme
-- Image grid powered by CSS Grid
-- Page Transitions & Animations
-
-## Why?
-
-If you want to quickly bootstrap a design/photography portfolio or use it as a foundation for your personal site the _gatsby-starter-portfolio_ are a perfect fit for you! The project's goal is to offer minimalistic and fast websites.
-
-I hope you like my starters and create something awesome! To see some of my work you can visit my [website](https://www.lekoarts.de) or support me on [Patreon](https://www.patreon.com/lekoarts) to get some neat rewards (4K images, project files, tutorial insights). Every pledge on Patreon helps me creating more free starters!
-
-Also check out the other _gatsby-starter-portfolio_:
-
-- [gatsby-starter-portfolio-emma](https://github.com/LekoArts/gatsby-starter-portfolio-emma)
-- [gatsby-starter-portfolio-bella](https://github.com/LekoArts/gatsby-starter-portfolio-bella)
-- [gatsby-starter-portfolio-cara](https://github.com/LekoArts/gatsby-starter-portfolio-cara)
-
-Check out the [Gatsby Starter Portfolio Overview](https://gatsby-starter-portfolio.netlify.com/)!
-
 ## Features
 
 - Configurable
@@ -73,20 +42,7 @@ npm run dev
 - Create a new MDX file, add the frontmatter (use the same date format)
 - **Optional:** Add text under the frontmatter (will be placed before the images)
 - Add your images in the folder (they will automatically be placed in the document). **Format:** JPG/PNG/TIF/WEBP
-
-If you're still unsure have a look at the already existing examples.
-
-### Adding new features/plugins
-
-You can add other features by having a look at the official [plugins page](https://www.gatsbyjs.org/docs/plugins/)
-
-### Building your site
-
-```
-npm run build
-```
-
-Copy the content of the `public` folder to your webhost or use a website like Netlify which automates that for you.
+- MDX files have to **"limitToDate"** fieds that define what day will be displayed on the calendar of this category. limitToDate value can be weekdayes like **"Sunday"** or a specific day like **"10/29"** or **"All"** that mean this category will displayed without limitation.
 
 ## Configuration
 
