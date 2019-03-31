@@ -68,7 +68,6 @@ const Index = ({ data: { categories, multiChance } }) => (
                   title={project.node.frontmatter.title}
                   cover={project.node.frontmatter.cover.childImageSharp.fluid}
                   path={project.node.fields.slug}
-                  areas={project.node.frontmatter.areas}
                   key={project.node.fields.slug}
                 />
               )
@@ -107,7 +106,6 @@ export const pageQuery = graphql`
               }
             }
             title
-            areas
             limitToDate
           }
         }

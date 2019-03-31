@@ -35,7 +35,7 @@ const Cover = styled.div`
   }
 `
 
-const ChanceCard = ({ path, cover, areas, title, delay }) => (
+const ChanceCard = ({ path, cover, delay }) => (
   <Spring
     native
     delay={200 * delay}
