@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
+import moment from 'moment-jalaali'
 import { Card, Header, Layout, ChanceCard } from '../components'
 import config from '../../config/site'
 
@@ -31,41 +32,53 @@ const Content = styled.div`
 const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
 `
-
-const Index = ({ data: { filterOnYearkDay, filterOnWeekDay, multiChance } }) => {
-  const filterdCatagories = [...filterOnWeekDay.edges, ...filterOnYearkDay.edges]
-  console.log('filterOnYearkDay=', filterOnYearkDay)
-  console.log('filterOnWeekDay=', filterOnWeekDay)
-  console.log('filterdCatagories=', filterdCatagories)
-  return (
-    <Layout>
-      <Header
-        avatar={config.avatar}
-        name={config.name}
-        siteDescription={config.siteDescription}
-        socialMedia={config.socialMedia}
-      />
-
-      <BG>
-        <Content>
-          <Grid>
-            <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
-            {filterdCatagories.map((project, index) => (
-              <Card
-                delay={index}
-                title={project.node.frontmatter.title}
-                cover={project.node.frontmatter.cover.childImageSharp.fluid}
-                path={project.node.fields.slug}
-                areas={project.node.frontmatter.areas}
-                key={project.node.fields.slug}
-              />
-            ))}
-          </Grid>
-        </Content>
-      </BG>
-    </Layout>
+function isShow(project) {
+  if (
+    project.node.frontmatter.limitToDate === 'All' ||
+    project.node.frontmatter.limitToDate === moment().format('jM/jD') ||
+    project.node.frontmatter.limitToDate ===
+      moment()
+        .local('fa')
+        .format('dddd')
   )
+    return true
+  return false
 }
+const Index = ({ data: { categories, multiChance } }) => (
+  <Layout>
+    <Header
+      avatar={config.avatar}
+      name={config.name}
+      siteDescription={config.siteDescription}
+      socialMedia={config.socialMedia}
+    />
+
+    <BG>
+      <Content>
+        <Grid>
+          <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
+          {categories.edges.map((project, index) => {
+            // ارسال متغیر تاریخ به کوئری گستبی در صفحه ایندکس پیچیدگی داره.
+            //  به همین دلیل اینجا تست میکنیم که اگه محدودیت تاریخی برای نشون دادن یک دسته بندی وجود داره،
+            //  اون رو اعمال کنه
+            if (isShow(project))
+              return (
+                <Card
+                  delay={index}
+                  title={project.node.frontmatter.title}
+                  cover={project.node.frontmatter.cover.childImageSharp.fluid}
+                  path={project.node.fields.slug}
+                  areas={project.node.frontmatter.areas}
+                  key={project.node.fields.slug}
+                />
+              )
+            return false
+          })}
+        </Grid>
+      </Content>
+    </BG>
+  </Layout>
+)
 
 export default Index
 
@@ -76,15 +89,10 @@ Index.propTypes = {
     }),
   }).isRequired,
 }
-// به نظر میاد گتبزبی راهی برای تعریف عملگر «یا» نداره. به همین دلیل مجبور شدم دوبار کوئری بزنم
-// یکبار برای پست هایی که با روزهای هفته فیلتر میشن و یکبار برای پست هایی که با تاریخ سالانه فیلتر می‌شن
-// درنهایت این دو خروجی رو در یک آرایه جمع می‌کنم
+
 export const pageQuery = graphql`
   query HomeQuery {
-    filterOnYearkDay: allMdx(
-      filter: { frontmatter: { limitDate: { eq: "Sunday" } } }
-      sort: { fields: [frontmatter___title], order: DESC }
-    ) {
+    categories: allMdx(sort: { fields: [frontmatter___title], order: DESC }) {
       edges {
         node {
           fields {
@@ -100,29 +108,7 @@ export const pageQuery = graphql`
             }
             title
             areas
-          }
-        }
-      }
-    }
-    filterOnWeekDay: allMdx(
-      filter: { frontmatter: { limitDate: { eq: "Saturday" } } }
-      sort: { fields: [frontmatter___title], order: DESC }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            cover {
-              childImageSharp {
-                fluid(maxWidth: 760, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            title
-            areas
+            limitToDate
           }
         }
       }
