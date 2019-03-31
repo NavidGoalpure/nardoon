@@ -33,7 +33,7 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
   return (
     <Layout customSEO>
       <SEO postPath={slug} postNode={postNode} postSEO />
-      <ProjectHeader avatar={config.avatar} title={project.title} areas={project.areas} text={postNode.code.body} />
+      <ProjectHeader avatar={config.avatar} title={project.title} text={postNode.code.body} />
       <BG>
         <OuterWrapper>
           <InnerWrapper>
@@ -112,7 +112,6 @@ export const pageQuery = graphql`
           }
         }
         title
-        areas
       }
     }
   }

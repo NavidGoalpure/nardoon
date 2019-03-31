@@ -42,25 +42,15 @@ const Content = styled.div`
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   opacity: 1;
   background: ${props => rgba(props.theme.colors.link, 0.65)};
-  height: 5rem;
+  height: 4rem;
 
   @media (min-width: ${props => props.theme.breakpoints.m}) {
     opacity: 0;
     height: 0px;
     ${CardItem}:hover & {
       opacity: 1;
-      height: 8rem;
+      height: 4rem;
     }
-  }
-`
-
-const Bottom = styled.div`
-  margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 0.85rem;
-  div:first-child {
-    margin-right: 1rem;
   }
 `
 
@@ -69,7 +59,7 @@ const Name = styled.h4`
   margin-top: 0;
 `
 
-const Card = ({ path, cover, areas, title, delay }) => (
+const Card = ({ path, cover, title, delay }) => (
   <Spring
     native
     delay={200 * delay}
@@ -85,16 +75,6 @@ const Card = ({ path, cover, areas, title, delay }) => (
           </Cover>
           <Content>
             <Name>{title}</Name>
-            <Bottom>
-              <div>
-                {areas.map((area, index) => (
-                  <React.Fragment key={area}>
-                    {index > 0 && ', '}
-                    <a>{area}</a>
-                  </React.Fragment>
-                ))}
-              </div>
-            </Bottom>
           </Content>
         </CardItem>
       </animated.div>
@@ -107,7 +87,6 @@ export default Card
 Card.propTypes = {
   path: PropTypes.string.isRequired,
   cover: PropTypes.object.isRequired,
-  areas: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   delay: PropTypes.number.isRequired,
 }
