@@ -90,7 +90,7 @@ const Card = ({ path, cover, areas, title, delay }) => (
                 {areas.map((area, index) => (
                   <React.Fragment key={area}>
                     {index > 0 && ', '}
-                    <a>{area}</a>
+                    <div>{area}</div>
                   </React.Fragment>
                 ))}
               </div>
