@@ -5,6 +5,17 @@ import { Spring, animated, config } from 'react-spring'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
+let i = -1
+let wordStore
+
+const getColor = props => {
+  if (wordStore !== props.title) {
+    i += 1
+    wordStore = props.title
+  }
+  if (i === props.theme.rainbowColors.length) i = 0
+  return props.theme.rainbowColors[i]
+}
 const CardItem = styled(Link)`
   display: block;
   margin-bottom: -2rem;
@@ -19,7 +30,7 @@ const CardItem = styled(Link)`
     min-height: 300px;
   }
   &:hover {
-    transform: translateY(16px);
+    transform: translateY(2rem);
   }
 `
 
@@ -31,7 +42,7 @@ const Cover = styled.div`
 const Content = styled.div`
   padding: 1rem;
   position: relative;
-  background: ${props => props.theme.colors.link};
+  background: ${props => getColor(props).light};
   height: 5rem;
 `
 const Rectangle = styled.div`
@@ -40,8 +51,8 @@ const Rectangle = styled.div`
   width: 0;
   height: 0;
   border-top: 1.5rem solid transparent;
-  border-left: 40px solid #075ea2;
-  border-right-color: #075ea2;
+  border-left: 40px solid;
+  border-left-color: ${props => getColor(props).dark};
 `
 
 const Name = styled.h4`
@@ -68,8 +79,8 @@ const Card = ({ path, cover, title, delay }) => (
             <Img fluid={cover} imgStyle={{ width: '95%' }} />
           </Cover>
         </CardItem>
-        <Rectangle />
-        <Content>
+        <Rectangle title={title} />
+        <Content title={title}>
           <Name>{title}</Name>
         </Content>
       </animated.div>
