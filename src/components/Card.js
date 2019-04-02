@@ -2,61 +2,66 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Spring, animated, config } from 'react-spring'
-import { rgba } from 'polished'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
+let i = -1
+let wordStore
+
+const getColor = props => {
+  if (wordStore !== props.title) {
+    i += 1
+    wordStore = props.title
+  }
+  if (i === props.theme.rainbowColors.length) i = 0
+  return props.theme.rainbowColors[i]
+}
 const CardItem = styled(Link)`
+  display: block;
+  margin-bottom: -2rem;
   min-height: 500px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+
   color: ${props => props.theme.colors.color};
   transition: all 0.3s ease-in-out;
-
-  &:hover {
-    color: white;
-    transform: translateY(-6px);
-  }
 
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     min-height: 300px;
   }
+  &:hover {
+    transform: translateY(2rem);
+  }
 `
 
 const Cover = styled.div`
-  width: 100%;
+  width: 95%;
   height: 100%;
-  position: absolute;
-  div {
-    overflow: hidden;
-  }
 `
 
 const Content = styled.div`
   padding: 1rem;
   position: relative;
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  opacity: 1;
-  background: ${props => rgba(props.theme.colors.link, 0.65)};
-  height: 4rem;
-
-  @media (min-width: ${props => props.theme.breakpoints.m}) {
-    opacity: 0;
-    height: 0px;
-    ${CardItem}:hover & {
-      opacity: 1;
-      height: 4rem;
-    }
-  }
+  background: ${props => getColor(props).light};
+  height: 5rem;
+`
+const Rectangle = styled.div`
+  width: 5%;
+  height: 2rem;
+  width: 0;
+  height: 0;
+  border-top: 1.5rem solid transparent;
+  border-left: 40px solid;
+  border-left-color: ${props => getColor(props).dark};
 `
 
 const Name = styled.h4`
   margin-bottom: 0;
   margin-top: 0;
+  padding-right: 0.5rem;
+  @media (min-width: ${props => props.theme.breakpoints.m}) {
+    padding-right: 1rem;
+  }
 `
 
 const Card = ({ path, cover, title, delay }) => (
@@ -71,12 +76,13 @@ const Card = ({ path, cover, title, delay }) => (
       <animated.div style={props}>
         <CardItem to={path}>
           <Cover>
-            <Img fluid={cover} />
+            <Img fluid={cover} imgStyle={{ width: '95%' }} />
           </Cover>
-          <Content>
-            <Name>{title}</Name>
-          </Content>
         </CardItem>
+        <Rectangle title={title} />
+        <Content title={title}>
+          <Name>{title}</Name>
+        </Content>
       </animated.div>
     )}
   </Spring>

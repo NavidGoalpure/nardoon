@@ -56,7 +56,7 @@ const Index = ({ data: { categories, multiChance } }) => (
     <BG>
       <Content>
         <Grid>
-          <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} path="/RandomPage/" />
+          <ChanceCard delay={0} cover={multiChance.edges[0].node.fluid} name="شانسی" path="/RandomPage/" />
           {categories.edges.map((project, index) => {
             // ارسال متغیر تاریخ به کوئری گستبی در صفحه ایندکس پیچیدگی داره.
             //  به همین دلیل اینجا تست میکنیم که اگه محدودیت تاریخی برای نشون دادن یک دسته بندی وجود داره،
