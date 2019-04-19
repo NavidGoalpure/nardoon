@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 import moment from 'moment-jalaali'
 import { Card, Header, Layout, ChanceCard } from '../components'
-import {}
 import config from '../../config/site'
 
 const Grid = styled.div`
