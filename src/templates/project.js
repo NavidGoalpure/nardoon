@@ -45,7 +45,7 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
               />
             ))}
           </InnerWrapper>
-          <ProjectPagination next={next} prev={prev} />
+          {/* <ProjectPagination next={next} prev={prev} /> */}
         </OuterWrapper>
       </BG>
     </Layout>
