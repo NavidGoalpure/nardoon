@@ -29,9 +29,9 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  // const projectTemplate = require.resolve('./src/templates/project.js')
+  const projectTemplate = require.resolve('./src/templates/project.js')
 
-  const projectTemplate = require.resolve('./src/templates/CardDeck.jsx')
+  // const projectTemplate = require.resolve('./src/templates/CardDeck.jsx')
 
   const { error, result } = await wrapper(
     graphql(`
