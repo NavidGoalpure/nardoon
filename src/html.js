@@ -6,10 +6,6 @@ export default class HTML extends React.Component {
     return (
       <html {...this.props.htmlAttributes}>
         <head>
-          {/* clicky analytic section */}
-          <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101175604);</script>
-          <script async src="//static.getclicky.com/js" />
-
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
